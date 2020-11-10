@@ -2,6 +2,10 @@ const router = require('express').Router();
 
 const axios = require('axios');
 
+router.get("/test", (req, res) => {
+    res.send('This is the test route');
+});
+
 router.get("/", async function (req, res) {
     let requestUrl = ""
     console.log(req.query);
