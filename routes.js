@@ -34,6 +34,9 @@ router.get("/", async function (req, res) {
     return res.json({titleString, imageString, descriptionString});
 });
 
+router.get("/jed", (req, res) => {
+    res.send("This is the url previewer backend");
+});
 
 const extractContent = (key, webContent) => {
     let ogTitleIndex = webContent.indexOf(key);
