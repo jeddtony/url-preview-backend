@@ -26,7 +26,8 @@ router.get("/", async function (req, res) {
     // let titleString = extractContent("og:title", webContent);
     let titleString = getTitle(webContent);
     console.log('showing this title string ', titleString);
-    let imageString = extractContent("og:image", webContent);
+    // let imageString = extractContent("og:image", webContent);
+    let imageString = getImage(webContent);
     console.log("showing image url ", imageString);
 
     // let descriptionString = extractContent("og:description", webContent);
@@ -123,6 +124,19 @@ const searchForMetaDescription = (webContent) => {
     let finalDescriptionContent = descriptionContent.substring(0, endingQuote);
 
     return finalDescriptionContent;
+}
+
+const getImage = (webContent) => {
+    let key = "favicon";
+    let faviconIndex = webContent.indexOf(key);
+    console.log('showing the favicon index ', faviconIndex);
+    let firstPartOfString = webContent.substring(0, faviconIndex);
+    let hrefIndex = firstPartOfString.lastIndexOf('href=');
+    let closingQuote = webContent.substring(faviconIndex).indexOf("\"");
+    console.log('show closing quote ', closingQuote);
+    let imageString = webContent.substring(hrefIndex + 6, firstPartOfString.length + closingQuote);
+    console.log('showing the image String ', imageString);
+    return imageString;
 }
 
 module.exports = router;
