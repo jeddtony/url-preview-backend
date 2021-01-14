@@ -5,7 +5,7 @@ const axios = require('axios');
 router.get("/", async function (req, res) {
     let requestUrl = ""
     console.log(req.query);
-     requestUrl = req.query.searchUrl;
+     requestUrl = req.query.q;
     console.log(requestUrl);
 
     if(requestUrl === ""){
@@ -24,17 +24,17 @@ router.get("/", async function (req, res) {
     let webContent = results.data;
 
     // let titleString = extractContent("og:title", webContent);
-    let titleString = getTitle(webContent);
-    console.log('showing this title string ', titleString);
+    let title = getTitle(webContent);
+    console.log('showing this title string ', title);
     // let imageString = extractContent("og:image", webContent);
-    let imageString = getImage(webContent);
-    console.log("showing image url ", imageString);
+    let image = getImage(webContent);
+    console.log("showing image url ", image);
 
     // let descriptionString = extractContent("og:description", webContent);
-    let descriptionString = getDescription(webContent);
-    console.log("showing the description ", descriptionString);
+    let description = getDescription(webContent);
+    console.log("showing the description ", description);
 
-    return res.json({titleString, imageString, descriptionString});
+    return res.json({"title": title, "image" : image, "description" : description});
 });
 
 router.get("/jed", (req, res) => {
